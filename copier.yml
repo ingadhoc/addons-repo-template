@@ -29,6 +29,14 @@ _message_after_copy: |
     $ git commit -m "Fix pre-commit issues"
 
 
+is_private:
+  type: bool
+  choices:
+    - true
+    - false
+  default: false
+  help: ¿Es este repositorio privado?
+
 odoo_version:
   type: float
   choices:
