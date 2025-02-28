@@ -34,7 +34,6 @@ is_private:
   choices:
     - true
     - false
-  default: false
   help: ¿Es este repositorio privado?
 
 odoo_version:
