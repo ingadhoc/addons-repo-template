@@ -4,7 +4,7 @@
 
 exclude: |
   (?x)
-  {% if pre_commit_ignore -%}
+  {%- if pre_commit_ignore %}
   # IGNORED PATHS (do not modify this directly, use copier update)
   {% for path in pre_commit_ignore -%}
   {{ path }}|
