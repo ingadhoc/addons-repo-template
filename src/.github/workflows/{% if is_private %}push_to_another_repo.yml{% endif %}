@@ -18,7 +18,7 @@ jobs:
         with:
           token: ${{ secrets.TOKEN }}
           fetch-depth: 0
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Push to ingadhoc
         run: git push --force https://github.com/ingadhoc/${GITHUB_REPOSITORY#'adhoc-dev/'}.git HEAD
       - name: PR link
