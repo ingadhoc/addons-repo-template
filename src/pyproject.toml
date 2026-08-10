@@ -151,3 +151,10 @@ enable = [
 [tool.pylint.reports]
 output-format = "colorized"
 msg-template = "{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}"
+
+[tool.mypy]
+check_untyped_defs = false
+follow_imports = "skip"
+ignore_missing_imports = true
+disable_error_code = ["import-untyped", "no-redef"]
+exclude = ["migrations/"]
