@@ -17,6 +17,8 @@ on:
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
+    permissions:
+      statuses: write
     steps:
       -
         name: Block sensitive file changes from fork PRs
