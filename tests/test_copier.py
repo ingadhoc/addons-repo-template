@@ -17,12 +17,14 @@ class TemporaryDirectoryCase(TestCase):
         return super().tearDownClass()
 
 
-class TestCopier(TemporaryDirectoryCase):
+class RenderedTemplateCase(TemporaryDirectoryCase):
+    odoo_version = 18.0
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.answers = dict(
-            odoo_version=18.0,
+            odoo_version=cls.odoo_version,
             slug="my-project",
             name="My Project",
             description="An awesome project",
@@ -41,8 +43,22 @@ class TestCopier(TemporaryDirectoryCase):
             quiet=True,
         )
 
+
+class TestCopier(RenderedTemplateCase):
     def test_copied_files(self):
         self.assertTrue((self.path / "README.md").is_file())
         self.assertTrue((self.path / ".github" / "workflows" / "pre-commit.yml").is_file())
         self.assertTrue((self.path / ".pre-commit-config.yaml").is_file())
         self.assertTrue((self.path / "pyproject.toml").is_file())
+
+    def test_copilot_instructions(self):
+        self.assertTrue((self.path / ".github" / "copilot-instructions.md").is_file())
+        self.assertTrue((self.path / ".github" / "instructions").is_dir())
+
+
+class TestCopier20(RenderedTemplateCase):
+    odoo_version = 20.0
+
+    def test_copilot_instructions_not_copied(self):
+        self.assertFalse((self.path / ".github" / "copilot-instructions.md").exists())
+        self.assertFalse((self.path / ".github" / "instructions").exists())
